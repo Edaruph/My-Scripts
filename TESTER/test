@@ -1,9 +1,15 @@
+
 local plr = game:GetService("Players").LocalPlayer
+
 local char = plr.Character or plr.CharacterAdded:Wait()
-local rleg = char:WaitForChild("RightBoot")
-local lleg = char:WaitForChild("LeftBoot")
+
+
+local rleg = char:FindFirstChild("RightBoot") or error("RightBoot not found")
+local lleg = char:FindFirstChild("LeftBoot") or error("LeftBoot not found")
+
+
 local camera = game:GetService("Workspace").CurrentCamera
-local studs = 25
+local studs = 5
 
 local props = {
     size = Vector3.new(1.75, 1.75, 1.75),
@@ -11,16 +17,18 @@ local props = {
     material = Enum.Material.SmoothPlastic
 }
 
+
 local function findBalls()
-    local table = {}
+    local result = {}
     for _, i in pairs(workspace:GetDescendants()) do
         if i:IsA("BasePart") then
+            -- Check properties
             if i.Size == props.size and i.Material == props.material and i.Shape == props.shape then
-                table.insert(table, i)
+                table.insert(result, i)
             end
         end
     end
-    return table
+    return result
 end
 
 local balls = findBalls()
