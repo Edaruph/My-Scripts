@@ -1,11 +1,7 @@
-
 local plr = game:GetService("Players").LocalPlayer
-
 local char = plr.Character or plr.CharacterAdded:Wait()
-
-
-local rleg = char:FindFirstChild("RightBoot") or error("RightBoot not found")
-local lleg = char:FindFirstChild("LeftBoot") or error("LeftBoot not found")
+local rleg = char:FindFirstChild("RightBoot") or print("RightBoot not found")
+local lleg = char:FindFirstChild("LeftBoot") or print("LeftBoot not found")
 
 
 local camera = game:GetService("Workspace").CurrentCamera
@@ -22,7 +18,6 @@ local function findBalls()
     local result = {}
     for _, i in pairs(workspace:GetDescendants()) do
         if i:IsA("BasePart") then
-            -- Check properties
             if i.Size == props.size and i.Material == props.material and i.Shape == props.shape then
                 table.insert(result, i)
             end
@@ -33,12 +28,8 @@ end
 
 local balls = findBalls()
 for _, ball in ipairs(balls) do
-    if (ball.Position - rleg.Position).Magnitude <= studs then
         firetouchinterest(ball, rleg, 0)
         firetouchinterest(ball, rleg, 1)
-    end
-    if (ball.Position - lleg.Position).Magnitude <= studs then
         firetouchinterest(ball, lleg, 0)
         firetouchinterest(ball, lleg, 1)
-    end
 end
