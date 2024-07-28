@@ -4,18 +4,11 @@ local props = {
     material = "SmoothPlastic"
 }
 
-local function areVectorsEqual(v1, v2, tolerance)
-    tolerance = tolerance or 0.01
-    return (math.abs(v1.X - v2.X) < tolerance) and
-           (math.abs(v1.Y - v2.Y) < tolerance) and
-           (math.abs(v1.Z - v2.Z) < tolerance)
-end
-
 local function findBalls()
     local foundBalls = {}
     for _, i in pairs(workspace:GetDescendants()) do
         if i:IsA("BasePart") then
-            if areVectorsEqual(i.Size, props.size) and i.Material == Enum.Material[props.material] then
+            if i.Size == props.size and i.Material == Enum.Material[props.material] then
                 table.insert(foundBalls, i)
             end
         end
