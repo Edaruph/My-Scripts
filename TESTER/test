@@ -1,7 +1,7 @@
 local plr = game:GetService("Players").LocalPlayer
-local char = plr.Character
-local rleg = char["RightBoot"]
-local lleg = char["LeftBoot"]
+local char = plr.Character or plr.CharacterAdded:Wait()
+local rleg = char:FindFirstChild("RightBoot")
+local lleg = char:FindFirstChild("LeftBoot")
 local camera = game:GetService("Workspace").CurrentCamera
 local studs = 5
 
@@ -12,28 +12,25 @@ local props = {
 }
 
 local function findBalls()
-    local table = {}
-    for _, i in pairs(workspace:GetDescendants()) do
-        if i:IsA("BasePart") then
-            if i.Size == props.size and i.Material == Enum.Material[props.material] then
-                table.insert(table, i)
+    local foundBalls = {}
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("BasePart") then
+            if (obj.Size - props.size).Magnitude < 0.01 and obj.Material == Enum.Material[props.material] then
+                table.insert(foundBalls, obj)
             end
         end
     end
-    return table
+    return foundBalls
 end
 
 local balls = findBalls()
 for _, ball in ipairs(balls) do
     if (ball.Position - rleg.Position).Magnitude <= studs then
-        firetouchinterest(ball, rleg, 0)
-        firetouchinterest(ball, rleg, 1)
+        ball:TouchEnded(rleg)
+        ball:TouchStarted(rleg)
     end
     if (ball.Position - lleg.Position).Magnitude <= studs then
-        firetouchinterest(ball, lleg, 0)
-        firetouchinterest(ball, lleg, 1)
+        ball:TouchEnded(lleg)
+        ball:TouchStarted(lleg)
     end
 end
-
-
-
