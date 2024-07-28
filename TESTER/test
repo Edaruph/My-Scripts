@@ -9,7 +9,7 @@ local lleg = char:FindFirstChild("LeftBoot") or error("LeftBoot not found")
 
 
 local camera = game:GetService("Workspace").CurrentCamera
-local studs = 5
+local studs = 25
 
 local props = {
     size = Vector3.new(1.75, 1.75, 1.75),
