@@ -28,5 +28,15 @@ end
 
 local balls = findBalls()
 for _, ball in ipairs(balls) do
-print(ball.Name)
+    local Updater
+    Updater = game:GetService("RunService").RenderStepped:Connect(function()
+        if (ball.Position - rleg.Position).Magnitude <= studs then
+            firetouchinterest(ball, rleg, 0)
+            firetouchinterest(ball, rleg, 1)
+        end
+        if (ball.Position - lleg.Position).Magnitude <= studs then
+            firetouchinterest(ball, lleg, 0)
+            firetouchinterest(ball, lleg, 1)
+        end
+    end)
 end
