@@ -28,8 +28,5 @@ end
 
 local balls = findBalls()
 for _, ball in ipairs(balls) do
-        firetouchinterest(ball, rleg, 0)
-        firetouchinterest(ball, rleg, 1)
-        firetouchinterest(ball, lleg, 0)
-        firetouchinterest(ball, lleg, 1)
+print(ball.Name)
 end
